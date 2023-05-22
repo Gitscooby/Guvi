@@ -5,7 +5,7 @@ pipeline {
     stage('Checkout') {
       steps {
         withCredentials([gitUsernamePassword(credentialsId: 'github-crenditial', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-          git 'https://github.com/<username>/<reponame>.git'
+          git 'https://github.com/Gitscooby/Guvi.git'
         }
       }
     }
