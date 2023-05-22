@@ -1,37 +1,31 @@
 pipeline {
   agent any
-
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '5'))
+  }
+  environment {
+    DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+  }
   stages {
-    stage('Checkout') {
-      steps {
-        withCredentials([gitUsernamePassword(credentialsId: 'github-crenditial', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-          git 'https://github.com/Gitscooby/Guvi.git'
-        }
-      }
-    }
-
     stage('Build') {
       steps {
-        sh 'docker build -t naveen712/Guvi .'
+        sh 'docker build -t naveen712/jenkins-docker-hub .'
       }
     }
-
     stage('Login') {
       steps {
-        sh 'docker login -u naveennk1467 -p N2veen712'
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
       }
     }
-
     stage('Push') {
       steps {
-        sh 'docker push naveen712/Guvi'
+        sh 'docker push naveen712/jenkins-docker-hub'
       }
     }
-
-    stage('Run') {
-      steps {
-        sh 'docker run -p 8080:80 naveen712/Guvi'
-      }
+  }
+  post {
+    always {
+      sh 'docker logout'
     }
   }
 }
