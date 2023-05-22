@@ -12,11 +12,6 @@ pipeline {
         sh 'docker build -t naveen712/jenkins-docker-hub .'
       }
     }
-    stage('Run') {
-      steps {
-        sh 'docker run -p 80:80 naveen712/guvi'
-      }
-    }
     stage('Login') {
       steps {
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
@@ -25,6 +20,11 @@ pipeline {
     stage('Push') {
       steps {
         sh 'docker push naveen712/jenkins-docker-hub'
+      }
+    }
+    stage('Run') {
+      steps {
+        sh 'docker run -p 80:80 naveen712/guvi'
       }
     }
   }
