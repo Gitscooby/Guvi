@@ -4,14 +4,14 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: '']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/Gitscooby/Guvi.git']]])
             }
         }
 
         stage('Build and Push Docker Image') {
             steps {
                 script {
-                    def imageName = "your-dockerhub-username/your-image-name:${env.BUILD_NUMBER}"
+                    def imageName = "naveen712/Guvi:${env.BUILD_NUMBER}"
                     def dockerImage = docker.build(imageName, "-f Dockerfile .")
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials-id') {
                         dockerImage.push()
