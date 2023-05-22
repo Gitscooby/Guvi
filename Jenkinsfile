@@ -24,7 +24,7 @@ pipeline {
     }
     stage('Run') {
       steps {
-        sh 'docker run -p 80:80 naveen712/guvi'
+        sh 'docker run -p 80:80 naveen712/jenkins-docker-hub'
       }
     }
   }
