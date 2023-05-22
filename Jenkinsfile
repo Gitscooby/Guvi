@@ -4,13 +4,15 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git 'https://github.com/Gitscooby/Guvi.git'
+        withCredentials([gitUsernamePassword(credentialsId: 'github-crenditial', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+          git 'https://github.com/<username>/<reponame>.git'
+        }
       }
     }
 
     stage('Build') {
       steps {
-        sh 'docker build -t naveen712/Guvi.'
+        sh 'docker build -t naveen712/Guvi .'
       }
     }
 
@@ -28,7 +30,7 @@ pipeline {
 
     stage('Run') {
       steps {
-        sh 'docker run -p 8080:8080 naveen712/Guvi'
+        sh 'docker run -p 8080:80 naveen712/Guvi'
       }
     }
   }
