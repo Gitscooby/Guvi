@@ -14,7 +14,7 @@ pipeline {
     }
     stage('Run') {
       steps {
-        sh 'docker run -p 80:80 naveen712/Guvi'
+        sh 'docker run -p 80:80 naveen712/guvi'
       }
     }
     stage('Login') {
