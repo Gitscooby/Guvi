@@ -24,8 +24,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials-id') {
-                        def imageName = "your-dockerhub-username/your-image-name:${env.BUILD_NUMBER}"
-                        docker.image(imageName).run('-p 8080:80 --name your-container-name')
+                        def imageName = "your-dockerhub-username/Guvi:${env.BUILD_NUMBER}"
+                        docker.image(imageName).run('-p 8080:80 --name Guvi')
                     }
                 }
             }
