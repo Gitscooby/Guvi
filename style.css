@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#greeting {
+    font-size: 32px;
+    font-weight: bold;
+}
