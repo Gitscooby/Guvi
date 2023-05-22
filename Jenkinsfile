@@ -24,7 +24,7 @@ pipeline {
     }
     stage('Run') {
       steps {
-        sh 'docker run -itd -p 80:80 naveen712/jenkins-docker-hub'
+        sh 'docker run -d -p 80:80 naveen712/jenkins-docker-hub'
       }
     }
   }
